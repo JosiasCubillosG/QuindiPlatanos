@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import Home from "./components/Home";
+import App from "./views/app";
 
 const app = document.getElementById("app")
 
-ReactDOM.render(<Home />, app);
+ReactDOM.render(<App />, app);
