@@ -1,0 +1,46 @@
+.income-container {
+    padding: 40px 0 0 0;    
+}
+
+.incomeTable tr td, .incomeTable tr th, table  {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+
+th, td {
+   padding: 15px; 
+}
+
+.incomeBtn {
+    display: flex;
+    margin: 20px 20px 5px 20px;
+}
+
+.incomeBtn button {
+    border-style: none;
+    color: white;
+    font-weight: bold;
+    background-color: rgb(23, 94, 47);
+    width: 80px;
+    height: 30px;
+    border-radius: 3px;
+}
+
+.incomeTable-container {
+    margin: 0 20px 0 20px;
+}
+
+.th-name{
+    width: 240px;
+}
+
+.th-valor {
+    width: 88px;
+    text-align: center;
+}
+
+.incomeTotal {
+    text-align: right;
+    margin: 20px 20px 0 0;
+    font-size: x-large;
+}

@@ -1,0 +1,24 @@
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+
+.useful table{
+    text-align: center;
+    width: 300px;
+    height: max-content;
+}
+
+.useful {
+    display: flex;
+    justify-content: center
+}
+
+.useful_income_outlay h3 {
+    margin: 0;
+}
+
+.useful_income_outlay{
+    margin: 80px 20px 40px 20px ;
+    padding-left: 30px;
+}

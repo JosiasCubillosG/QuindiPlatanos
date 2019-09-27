@@ -6,7 +6,7 @@ const Recover = (props) => {
         <div className="recover-container">
             <h2>Recuperar Contraseña</h2>
 
-            <input className="recover-pass" type="text" name="recover" placeholder="Contraseña" />
+            <input className="recover-pass" type="text" name="recover" placeholder="Correo" />
 
             <button onClick={props.recoverPass} className="recover-btn">Solicitar recuperación</button>
         </div>

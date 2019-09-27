@@ -1,5 +1,18 @@
 .recover-container {
+    position: absolute;
+    top: 50px;
+    bottom: 0px;
+    right: 0px;
+    left: 0px;
     text-align: center;
+    max-height: auto;
+    overflow: hidden;
+    background-image: url("../../../public/images/platanos.jpg");
+    background-color: rgba(255,255,255,0.6);
+    background-blend-mode: lighten;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
 }
 
 .recover-container h2 {
@@ -18,7 +31,7 @@
 }
 
 .recover-btn {
-    background-color: transparent;
+    background-color: white;
     width: 170px;
     height: 40px;
     border-radius: 8px;

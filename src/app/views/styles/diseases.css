@@ -1,0 +1,29 @@
+.diseases-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 200px 200px;
+}
+
+.disease {
+    display: grid;
+    justify-content: center;
+    align-content: center;
+}
+
+.disease-moko {
+    background-image: url("../../../public/images/enfermedad1.jpeg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-color: rgba(255,255,255,0.6);
+    background-blend-mode: lighten;
+}
+
+.disease-picudo {
+    background-image: url("../../../public/images/Enfermedades.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-color: rgba(255,255,255,0.6);
+    background-blend-mode: lighten;
+}

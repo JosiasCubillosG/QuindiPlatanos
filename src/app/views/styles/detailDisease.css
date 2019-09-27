@@ -1,0 +1,16 @@
+.nameDisease {
+    text-align: center;
+}
+
+.symptomatology, .treatment {
+    padding: 10px 50px 10px 50px;
+}
+
+.btnContact{
+    width: 100%;
+    height: 40px;
+    font-weight: bold;
+    font-size: large;
+    background-color: rgba(66, 99, 66, 0.74)
+}
+
