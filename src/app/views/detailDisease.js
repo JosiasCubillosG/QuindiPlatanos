@@ -10,7 +10,7 @@ class DetailDisease extends React.Component {
                     <div className="nameDisease">
                         <h2>Nombre de Enfermedad</h2>
                     </div>
-                    <div>
+                    <div className="carouselDisease">
                         <DemoCarousel />
                     </div>
                     <div className="symptomatology">

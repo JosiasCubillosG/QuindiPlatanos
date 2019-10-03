@@ -1,0 +1,27 @@
+.addCrop-title {
+    text-align: center;
+}
+
+.addCrop-name, .nameCrop, .addCrop-numberPlants, .numberPlants  {
+    display: block;
+    margin: 0 auto;
+}
+
+.nameCrop, .numberPlants{
+    width: 200px;
+    height: 25px;
+    border-radius: 20px;
+    box-shadow: -1px 5px 10px gray;
+}
+
+.addCrop-name, .addCrop-numberPlants{
+    margin: 70px 0  0 98px;
+}
+
+.add-btn {
+    margin: 60px 0 0 150px;
+    background-color: transparent;
+    width: 120px;
+    height: 40px;
+    border-radius: 8px;
+}

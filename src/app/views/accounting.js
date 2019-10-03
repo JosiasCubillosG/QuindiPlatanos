@@ -16,7 +16,7 @@ class Accounting extends React.Component {
                     <div className="grossProfit">
                         <h3>Utilidad</h3>
                     </div>
-            </div>
+                </div>
             </Layout>
         );
     }

@@ -9,6 +9,9 @@ import Accounting from "./views/accounting";
 import Income from "./views/income";
 import Outlay from "./views/outlay";
 import Useful from "./components/useful";
+import ListCrops from "./views/listCrops";
+import AddCrop from "./views/addCrop";
+import DetailCrop from "./views/detailCrop";
 const app = document.getElementById("app")
 
-ReactDOM.render(< Useful />, app);
+ReactDOM.render(< DetailDisease />, app);

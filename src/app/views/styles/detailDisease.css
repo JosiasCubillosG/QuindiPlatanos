@@ -14,3 +14,12 @@
     background-color: rgba(66, 99, 66, 0.74)
 }
 
+.carouselDisease .carousel {
+    height: 200px;
+    overflow: hidden;
+    /* Add this */
+    position:relative;
+    top:0;
+    left:43px;
+
+}
