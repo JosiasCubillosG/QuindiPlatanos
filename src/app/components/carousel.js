@@ -4,7 +4,6 @@ import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import { Carousel } from 'react-responsive-carousel';
 import enfermedad1 from "../../public/images/enfermedad1.jpeg"
 import enfermedad2 from "../../public/images/Enfermedades.jpg"
-import "./styles/carousel.css"
 
 class DemoCarousel extends Component {
     render() {

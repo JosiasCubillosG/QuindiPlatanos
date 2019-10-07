@@ -12,6 +12,10 @@ import Useful from "./components/useful";
 import ListCrops from "./views/listCrops";
 import AddCrop from "./views/addCrop";
 import DetailCrop from "./views/detailCrop";
+import MenuHamburguer from "./components/hamburguerMenu";
+import Login from "./components/login";
+import Layout from "./components/Layout";
+import Menu from "./views/menu";
 const app = document.getElementById("app")
 
-ReactDOM.render(< DetailDisease />, app);
+ReactDOM.render(< Accounting />, app);
