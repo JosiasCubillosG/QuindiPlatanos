@@ -4,6 +4,14 @@
     grid-template-rows: 200px 200px;
 }
 
+.diseases-container a {
+    text-decoration: none;
+}
+
+.diseases-container a:visited {
+    color: black;
+} 
+
 .disease {
     display: grid;
     justify-content: center;

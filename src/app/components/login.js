@@ -1,5 +1,6 @@
 import React from "react";
 import "./styles/login.css";
+import {Link} from "react-router-dom"
 
 const Login = (props) => {
         return(
@@ -9,10 +10,14 @@ const Login = (props) => {
                     <input className="login-email" type="text"  name="email" placeholder="Correo" ></input>
 
                     <input className="login-password" type="text"  name="password" placeholder="Contraseña" ></input>
-                   
-                    <button className="login-btn">Ingresar</button>
-
-                    <button onClick={props.handleClick} className="login-p" >Se me olvidó la contraseña</button>
+                    
+                    <Link to="/options">
+                        <button className="login-btn">Ingresar</button>
+                    </Link>
+                    
+                    <Link to="/recover" className="login-p">
+                        Se me olvidó la contraseña
+                    </Link>
                 </form>
             </div>
         )

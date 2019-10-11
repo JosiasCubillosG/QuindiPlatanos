@@ -16,6 +16,7 @@ import MenuHamburguer from "./components/hamburguerMenu";
 import Login from "./components/login";
 import Layout from "./components/Layout";
 import Menu from "./views/menu";
+import Routes from "./components/routes";
 const app = document.getElementById("app")
 
-ReactDOM.render(< Accounting />, app);
+ReactDOM.render(<Routes/>, app);

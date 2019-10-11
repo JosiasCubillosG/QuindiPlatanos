@@ -1,5 +1,6 @@
 import React from "react";
 import "./styles/recoverpass.css";
+import {Link} from "react-router-dom"
 
 const Recover = (props) => {
     return(
@@ -8,7 +9,9 @@ const Recover = (props) => {
 
             <input className="recover-pass" type="text" name="recover" placeholder="Correo" />
 
-            <button onClick={props.recoverPass} className="recover-btn">Solicitar recuperación</button>
+            <Link to="/">
+                <button onClick={props.recoverPass} className="recover-btn">Solicitar recuperación</button>
+            </Link>
         </div>
     )
 }

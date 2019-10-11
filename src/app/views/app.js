@@ -8,21 +8,13 @@ import ModalPass from "../components/modalPass";
 class App extends React.Component {
 
     state = {
-        newPassword: false,
         modalPassword: false,
     }
 
-    handleClick = (e) => {
-        e.preventDefault();
-        this.setState({
-            newPassword: true,
-        })
-    }
 
     recoverPass = (e) => {
         e.preventDefault();
         this.setState({
-            newPassword: false,
             modalPassword: true,
         })
     }
@@ -35,30 +27,17 @@ class App extends React.Component {
     }
 
     render(){
-
-        if(this.state.newPassword){
-            return(
-                <Layout>
-                    <Recover recoverPass={this.recoverPass} />
-                </Layout>
-            )
-        }else{
-
-            return(
-                <React.Fragment>
-                    <Layout>
-                        <Login handleClick={this.handleClick} />
-                        {
-                            this.state.modalPassword &&
-                            <ModalPassContainer>
-                                <ModalPass handleClick={this.closeModalPass} />
-                            </ModalPassContainer>
-                        }
-                    </Layout>
-                </React.Fragment>
-            )
-        }
+        return(
+            <React.Fragment>
+                    <Login />
+                    {
+                        this.state.modalPassword &&
+                        <ModalPassContainer>
+                            <ModalPass handleClick={this.closeModalPass} />
+                        </ModalPassContainer>
+                    }
+            </React.Fragment>
+        )
     }
 }
-
 export default App;

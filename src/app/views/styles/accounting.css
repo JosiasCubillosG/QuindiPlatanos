@@ -6,6 +6,11 @@
     height: 100%;
 }
 
+.accounting-container a, .accounting-container a:visited {
+    text-decoration: none;
+    color: black;
+}
+
 .income, .outlay, .grossProfit {
     display: flex;
     height: 120px;

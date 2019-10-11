@@ -5,40 +5,38 @@ import "./styles/income.css"
 class Income extends React.Component {
     render() {
         return (
-            <Layout>
-                <div className="income-container">
-                    <div className="incomeBtn">
-                        <button>Agregar</button>
-                    </div>
-                    <div className="incomeTable-container">
-                        <table className="incomeTable">
-                            <tr>
-                                <th className="th-name">Nombre</th>
-                                <th className="th-valor">Valor</th>
-                            </tr>
-                            <tr>
-                                <td className="th-name">Abono</td>
-                                <td className="th-valor">50000</td>
-                            </tr>
-                            <tr>
-                                <td className="th-name">Abono por concepto de dos bultos de platano</td>
-                                <td className="th-valor">50000</td>
-                            </tr>
-                            <tr>
-                                <td className="th-name">Abono</td>
-                                <td className="th-valor">50000</td>
-                            </tr>
-                            <tr>
-                                <td className="th-name">Abono</td>
-                                <td className="th-valor">50000</td>
-                            </tr>
-                        </table>
-                    </div>
-                    <div className="incomeTotal">
-                        <h4>Total ingresos: $520.000</h4>
-                    </div>
+            <div className="income-container">
+                <div className="incomeBtn">
+                    <button>Agregar</button>
                 </div>
-            </Layout>
+                <div className="incomeTable-container">
+                    <table className="incomeTable">
+                        <tr>
+                            <th className="th-name">Nombre</th>
+                            <th className="th-valor">Valor</th>
+                        </tr>
+                        <tr>
+                            <td className="th-name">Abono</td>
+                            <td className="th-valor">50000</td>
+                        </tr>
+                        <tr>
+                            <td className="th-name">Abono por concepto de dos bultos de platano</td>
+                            <td className="th-valor">50000</td>
+                        </tr>
+                        <tr>
+                            <td className="th-name">Abono</td>
+                            <td className="th-valor">50000</td>
+                        </tr>
+                        <tr>
+                            <td className="th-name">Abono</td>
+                            <td className="th-valor">50000</td>
+                        </tr>
+                    </table>
+                </div>
+                <div className="incomeTotal">
+                    <h4>Total ingresos: $520.000</h4>
+                </div>
+            </div>
         );
     }
 }
