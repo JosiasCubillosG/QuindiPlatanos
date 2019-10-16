@@ -1,28 +1,37 @@
 const plantsMocks = require('../utils/mocks/plants');
+const MongoLib = require('../lib/mongo');
 
 class PlantsService {
     constructor(){
-
+        this.collection = 'plants';
+        this.mongoDB = new MongoLib();
     }
 
-    getPlants({ tags }){
-        return Promise.resolve(plantsMocks);
+    async getPlants({ tags }) {
+        const query = tags && { tags: { $in: tags } };
+        const plants = await this.mongoDB.getAll(this.collection, query);
+        
+        return plants || [];
     }
 
-    getPlant({ plantId }){
-        return Promise.resolve(plantsMocks[0]);
+    async getPlant({ plantId }) {
+        const plant = await this.mongoDB.get(this.collection, plantId);
+        return plant || {};
     }
 
-    createPlant({ plant }){
-        return Promise.resolve(plantsMocks[0]);
+    async createPlant({ plant }) {
+        const createPlantId = await this.mongoDB.create(this.collection, plant);
+        return createPlantId;
     }
 
-    updatePlant({ plantId, plant }){
-        return Promise.resolve(plantsMocks[0]);
+    async updatePlant({ plantId, plant }) {
+        const updatePlantId = await this.mongoDB.update(this.collection, plantId, plant);
+        return updatePlantId;
     }
 
-    deletePlant({ plantId }){
-        return Promise.resolve(plantsMocks[0]);
+    async deletePlant({ plantId }) {
+        const deletedPlantId = await this.mongoDB.delete(this.collection, plantId);
+        return deletedPlantId;
     }
 }
 

@@ -10,8 +10,8 @@ router.get("/", async function(req, res, next){
     const { tags } = req.query;
     
     try{
-        const plant = await plantService.getPlants({ tags });
-        res.render("plants",{ plants });
+        const plants = await plantService.getPlants({ tags });
+        res.render("plants", { plants });
     }catch(err){
         next(err);
     }
