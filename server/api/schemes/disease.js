@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const UserScheme = new Schema({
+const DiseaseScheme = new Schema({
 	createdDate: {
 		default: Date.now,
 		type: Date
@@ -10,14 +10,14 @@ const UserScheme = new Schema({
 		required: 'Please add the name.',
 		type: String
     },
-    email:{
-        required: 'please add the email',
+    symptomatology: {
+        required: 'Please add the symptomatology',
         type: String
     },
-    password:{
-        required: 'please add the password',
+    treatment: {
+        required: 'Please add the treatment',
         type: String
     }
 });
 
-module.exports = UserScheme;
+module.exports = DiseaseScheme;

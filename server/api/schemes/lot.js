@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const PlantScheme = new Schema({
+const LotScheme = new Schema({
 	createdDate: {
 		default: Date.now,
 		type: Date
@@ -9,7 +9,14 @@ const PlantScheme = new Schema({
 	name: {
 		required: 'Please add the name.',
 		type: String
+	},
+	plants: {
+		required: 'Please add the number Plants',
+		type: Number
+	},
+	cropId: {
+		type: String
 	}
 });
 
-module.exports = PlantScheme;
+module.exports = LotScheme;
