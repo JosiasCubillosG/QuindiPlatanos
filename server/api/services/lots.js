@@ -14,7 +14,7 @@ const LotsService = {
         }
     },
     async getLot(req, res) {
-        const lottId = req.params.lottId;
+        const lotId = req.params.lotId;
 
         try{
             const lot = await Lot.findOne({ _id: lotId });   
@@ -46,7 +46,7 @@ const LotsService = {
                 status: 'error'
             });
 
-            await Lot.update({ _id: lot._id }, lotData);
+            await Lot.updateOne({ _id: lot._id }, lotData);
             res.send({ lot, status: 'success' });
         }catch(err){
             res.send({ message: err.message, status: 'error' });

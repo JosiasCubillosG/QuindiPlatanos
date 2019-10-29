@@ -1,4 +1,6 @@
-const User = require('../models/user');
+const UserScheme = require('../schemes/user');
+const mongoose = require('mongoose');
+const User = mongoose.model('Users', UserScheme);
 
 const UsersService = {
     async getUsers(req, res) {
@@ -25,7 +27,7 @@ const UsersService = {
     async createUser(req, res) {
         const { body: userData } = req;
         try{
-            const user = User.new(userData);
+            const user = new User(userData);
             await user.save();
             res.send({ user, status: 'success' });
         }catch(err){

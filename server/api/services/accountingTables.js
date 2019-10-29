@@ -1,6 +1,8 @@
-const AccountingTable = require('../models/accountingTable');
+const mongoose = require('mongoose');
+const AccountingScheme = require('../schemes/accountingTable');
+const AccountingTable = mongoose.model('AccountingTables', AccountingScheme);
 
-const AccountingTableService = {
+const AccountingTablesService = {
 
     async getAccountingTables(req, res) {
         const tags = req.query && req.query.tags;
@@ -26,7 +28,7 @@ const AccountingTableService = {
     async createAccountingTable(req, res) {
         const { body: accountingTableData } = req;
         try{
-            const table = AccountingTable.new(accountingTableData);
+            const table = new AccountingTable(accountingTableData);
             await table.save();
             res.send({ table, status: 'success' });
         }catch(err){
@@ -60,11 +62,11 @@ const AccountingTableService = {
             });
 
             await table.remove();
-            res.send({ status: 'success' });
+            res.send({ table, status: 'success' });
         }catch(err){
             res.send({ message: err.message, status: 'error' });
         }
     }
 }
 
-module.exports = AccountingTableService;
+module.exports = AccountingTablesService;

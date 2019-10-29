@@ -1,4 +1,4 @@
-const accountingScheme = require('../schemes/accountingTable');
+const AccountingScheme = require('../schemes/accountingTable');
 const mongoose = require('mongoose');
 
-module.exports = mongoose.model('accountingTables', accountingScheme);
+module.exports = mongoose.model('AccountingTables', AccountingScheme);

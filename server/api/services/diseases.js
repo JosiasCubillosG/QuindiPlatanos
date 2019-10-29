@@ -1,4 +1,6 @@
-const Disease = require('../models/disease');
+const DiseaseScheme = require('../schemes/disease');
+const mongoose = require('mongoose');
+const Disease = mongoose.model('Diseases', DiseaseScheme);
 
 const DiseasesService = {
     async getDiseases(req, res) {
@@ -25,7 +27,7 @@ const DiseasesService = {
     async createDisease(req, res) {
         const { body: diseaseData } = req;
         try{
-            const disease = Disease.new(diseaseData);
+            const disease = new Disease(diseaseData);
             await disease.save();
             res.send({ disease, status: 'success' });
         }catch(err){

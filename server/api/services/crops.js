@@ -1,4 +1,6 @@
-const Crop = require('../models/crop');
+const mongoose = require('mongoose');
+const cropScheme = require('../schemes/crop');
+const Crop = mongoose.model('Crops', cropScheme);
 
 const CropsService = {
     async getCrops(req, res) {
@@ -25,7 +27,7 @@ const CropsService = {
     async createCrop(req, res) {
         const { body: cropData } = req;
         try{
-            const crop = Crop.new(cropData);
+            const crop = new Crop(cropData);
             await crop.save();
             res.send({ crop, status: 'success' });
         }catch(err){
@@ -51,7 +53,7 @@ const CropsService = {
     async deleteCrop(req, res) {
         const cropId = req.params.cropId;
         try{
-            const crop = Crop.findById(plantId);
+            const crop = Crop.findById(cropId);
 
             if (!crop) return res.send({
                 message: 'The crop does not exist',

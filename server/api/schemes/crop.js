@@ -10,17 +10,13 @@ const CropScheme = new Schema({
 		required: 'Please add the name.',
 		type: String
     },
-    lot:{
-        required: 'Please add the name lot',
-        type: String
-    },
-    Days:{
+    days:{
         required: 'Please add the number days',
         type: Number
     },
     harvestDate: {
         required: 'Please add the finish date',
-        type: Date
+        type: String
     },
     userId: {
         type: String
