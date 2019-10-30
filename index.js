@@ -13,6 +13,12 @@ const diseasesRouter = require('./server/api/routes/views/diseases');
 const diseasesApiRouter = require('./server/api/routes/api/diseases');
 const usersRouter = require('./server/api/routes/views/users');
 const usersApiRouter = require('./server/api/routes/api/users');
+const incomesRouter = require('./server/api/routes/views/incomes');
+const incomesApiRouter = require('./server/api/routes/api/incomes');
+const expensesRouter = require('./server/api/routes/views/expenses');
+const expensesApiRouter = require('./server/api/routes/api/expenses');
+ 
+
 const { MONGO_URI } = require('./server/api/config/constants/database');
 
 // app
@@ -48,6 +54,10 @@ app.use("diseases", diseasesRouter);
 app.use("/api/diseases", diseasesApiRouter);
 app.use("users", usersRouter);
 app.use("/api/users", usersApiRouter);
+app.use("incomes", incomesRouter);
+app.use("/api/incomes", incomesApiRouter);
+app.use("expenses", expensesRouter);
+app.use("/api/expenses", expensesApiRouter);
 
 // redirect
 app.use("/", function(req, res){
