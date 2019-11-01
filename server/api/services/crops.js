@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
-const cropScheme = require('../schemes/crop');
-const Crop = mongoose.model('Crops', cropScheme);
+const Crop = mongoose.model('Crops');
 
 const CropsService = {
     async getCrops(req, res) {
@@ -37,14 +36,14 @@ const CropsService = {
     async updateCrop(req, res) {
         const { body: cropData } = req;
         try{
-            const crop = Crop.findById(cropData._id);
+            const crop = await Crop.findById(req.params.cropId);
 
             if (!crop) return res.send({
                 message: 'The crop does not exist',
                 status: 'error'
             });
 
-            await Crop.update({ _id: crop._id }, cropData);
+            await Crop.updateOne({ _id: crop._id }, cropData);
             res.send({ crop, status: 'success' });
         }catch(err){
             res.send({ message: err.message, status: 'error' });
@@ -53,15 +52,15 @@ const CropsService = {
     async deleteCrop(req, res) {
         const cropId = req.params.cropId;
         try{
-            const crop = Crop.findById(cropId);
+            const crop = await Crop.findById(cropId);
 
             if (!crop) return res.send({
                 message: 'The crop does not exist',
                 status: 'error'
             });
 
-            await crop.remove();
-            res.send({ status: 'success' });
+            await crop.deleteOne();
+            res.send({ crop, status: 'success' });
         }catch(err){
             res.send({ message: err.message, status: 'error' });
         }

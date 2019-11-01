@@ -26,8 +26,6 @@ const LotsService = {
     async createLot(req, res) {
         const lotData = req.body;
 
-        console.log(req.body);
-
         try{
             const lot = new Lot(lotData);
             await lot.save();
@@ -39,7 +37,7 @@ const LotsService = {
     async updateLot(req, res) {
         const { body: lotData } = req;
         try{
-            const lot = Lot.findById(lotData._id);
+            const lot = await Lot.findById(req.params.lotId);
 
             if (!lot) return res.send({
                 message: 'The lot does not exist',
@@ -55,15 +53,15 @@ const LotsService = {
     async deleteLot(req, res) {
         const lotId = req.params.lotId;
         try{
-            const lot = Lot.findById(lotId);
+            const lot = await Lot.findById(lotId);
 
             if (!lot) return res.send({
                 message: 'The lot does not exist',
                 status: 'error'
             });
 
-            await lot.remove();
-            res.send({ status: 'success' });
+            await lot.deleteOne();
+            res.send({ lot, status: 'success' });
         }catch(err){
             res.send({ message: err.message, status: 'error' });
         }

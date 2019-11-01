@@ -4,8 +4,8 @@ const AccountingTablesService = require('../../services/accountingTables');
 
 router.get('/', AccountingTablesService.getAccountingTables);
 router.post('/', AccountingTablesService.createAccountingTable);
-router.get('/:tableId', AccountingTablesService.getAccountingTable);
-router.put('/:tableId', AccountingTablesService.updateAccountingTable);
-router.delete('/:tableId', AccountingTablesService.deleteAccountingTable);
+router.get('/:accountingTableId', AccountingTablesService.getAccountingTable);
+router.put('/:accountingTableId', AccountingTablesService.updateAccountingTable);
+router.delete('/:accountingTableId', AccountingTablesService.deleteAccountingTable);
 
 module.exports = router;

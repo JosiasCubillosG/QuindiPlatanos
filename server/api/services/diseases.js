@@ -1,6 +1,5 @@
-const DiseaseScheme = require('../schemes/disease');
 const mongoose = require('mongoose');
-const Disease = mongoose.model('Diseases', DiseaseScheme);
+const Disease = mongoose.model('Diseases');
 
 const DiseasesService = {
     async getDiseases(req, res) {
@@ -37,14 +36,14 @@ const DiseasesService = {
     async updateDisease(req, res) {
         const { body: diseaseData } = req;
         try{
-            const disease = Disease.findById(diseaseData._id);
+            const disease = await Disease.findById(req.params.diseaseId);
 
             if (!disease) return res.send({
                 message: 'The disease does not exist',
                 status: 'error'
             });
 
-            await Disease.update({ _id: disease._id }, diseaseData);
+            await Disease.updateOne({ _id: disease._id }, diseaseData);
             res.send({ disease, status: 'success' });
         }catch(err){
             res.send({ message: err.message, status: 'error' });
@@ -53,7 +52,7 @@ const DiseasesService = {
     async deleteDisease(req, res) {
         const diseaseId = req.params.diseaseId;
         try{
-            const disease = Disease.findById(diseaseId);
+            const disease = await Disease.findById(diseaseId);
 
             if (!disease) return res.send({
                 message: 'The disease does not exist',
@@ -61,7 +60,7 @@ const DiseasesService = {
             });
 
             await disease.remove();
-            res.send({ status: 'success' });
+            res.send({ disease, status: 'success' });
         }catch(err){
             res.send({ message: err.message, status: 'error' });
         }

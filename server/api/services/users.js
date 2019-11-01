@@ -1,6 +1,5 @@
-const UserScheme = require('../schemes/user');
 const mongoose = require('mongoose');
-const User = mongoose.model('Users', UserScheme);
+const User = mongoose.model('Users');
 
 const UsersService = {
     async getUsers(req, res) {
@@ -37,14 +36,14 @@ const UsersService = {
     async updateUser(req, res) {
         const { body: userData } = req;
         try{
-            const user = User.findById(userData._id);
+            const user = await User.findById(req.params.userId);
 
             if (!user) return res.send({
                 message: 'The user does not exist',
                 status: 'error'
             });
 
-            await User.update({ _id: user._id }, userData);
+            await User.updateOne({ _id: user._id }, userData);
             res.send({ user, status: 'success' });
         }catch(err){
             res.send({ message: err.message, status: 'error' });
@@ -53,15 +52,15 @@ const UsersService = {
     async deleteUser(req, res) {
         const userId = req.params.userId;
         try{
-            const user = User.findById(userId);
+            const user = await User.findById(userId);
 
             if (!user) return res.send({
                 message: 'The user does not exist',
                 status: 'error'
             });
 
-            await user.remove();
-            res.send({ status: 'success' });
+            await user.deleteOne();
+            res.send({ user, status: 'success' });
         }catch(err){
             res.send({ message: err.message, status: 'error' });
         }

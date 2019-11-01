@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
-const ExpenseScheme = require('../schemes/expense');
-const Expense = mongoose.model('Expenses', ExpenseScheme);
+const Expense = mongoose.model('Expenses');
 
 const ExpenseService = {
 
@@ -38,14 +37,14 @@ const ExpenseService = {
     async updateExpense(req, res) {
         const { body: expenseData } = req;
         try{
-            const expense = Expense.findById(expenseData._id);
+            const expense = await Expense.findById(req.params.expenseId);
 
             if (!expense) return res.send({
                 message: 'The expense does not exist',
                 status: 'error'
             });
 
-            await Expense.update({ _id: expense._id }, expenseData);
+            await Expense.updateOne({ _id: expense._id }, expenseData);
             res.send({ expense, status: 'success' });
         }catch(err){
             res.send({ message: err.message, status: 'error' });
@@ -54,14 +53,14 @@ const ExpenseService = {
     async deleteExpense(req, res) {
         const expenseId = req.params.expenseId;
         try{
-            const expense = Expense.findById(expenseId);
+            const expense = await Expense.findById(expenseId);
 
             if (!expense) return res.send({
                 message: 'The expense does not exist',
                 status: 'error'
             });
 
-            await expense.remove();
+            await expense.deleteOne();
             res.send({ expense, status: 'success' });
         }catch(err){
             res.send({ message: err.message, status: 'error' });

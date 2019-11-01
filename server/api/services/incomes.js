@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
-const IncomeScheme = require('../schemes/income');
-const Income = mongoose.model('Incomes', IncomeScheme);
+const Income = mongoose.model('Incomes');
 
 const IncomeService = {
 
@@ -38,14 +37,14 @@ const IncomeService = {
     async updateIncome(req, res) {
         const { body: incomeData } = req;
         try{
-            const income = Income.findById(incomeData._id);
+            const income = await Income.findById(req.params.incomeId);
 
             if (!income) return res.send({
                 message: 'The income does not exist',
                 status: 'error'
             });
 
-            await Income.update({ _id: income._id }, incomeData);
+            await Income.updateOne({ _id: income._id }, incomeData);
             res.send({ income, status: 'success' });
         }catch(err){
             res.send({ message: err.message, status: 'error' });
@@ -54,14 +53,14 @@ const IncomeService = {
     async deleteIncome(req, res) {
         const incomeId = req.params.incomeId;
         try{
-            const income = Income.findById(incomeId);
+            const income = await Income.findById(incomeId);
 
             if (!income) return res.send({
                 message: 'The income does not exist',
                 status: 'error'
             });
 
-            await income.remove();
+            await income.deleteOne();
             res.send({ income, status: 'success' });
         }catch(err){
             res.send({ message: err.message, status: 'error' });

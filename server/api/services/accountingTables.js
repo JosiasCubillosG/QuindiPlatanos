@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
-const AccountingScheme = require('../schemes/accountingTable');
-const AccountingTable = mongoose.model('AccountingTables', AccountingScheme);
+const AccountingTable = mongoose.model('AccountingTables');
 
 const AccountingTablesService = {
 
@@ -38,14 +37,14 @@ const AccountingTablesService = {
     async updateAccountingTable(req, res) {
         const { body: accountingTableData } = req;
         try{
-            const table = AccountingTable.findById(accountingTableData._id);
+            const table = await AccountingTable.findById(req.params.accountingTableId);
 
             if (!table) return res.send({
                 message: 'The table does not exist',
                 status: 'error'
             });
 
-            await AccountingTable.update({ _id: table._id }, accountingTableData);
+            await AccountingTable.updateOne({ _id: table._id }, accountingTableData);
             res.send({ table, status: 'success' });
         }catch(err){
             res.send({ message: err.message, status: 'error' });
@@ -54,14 +53,14 @@ const AccountingTablesService = {
     async deleteAccountingTable(req, res) {
         const accountingTableId = req.params.accountingTableId;
         try{
-            const table = AccountingTable.findById(accountingTableId);
+            const table = await AccountingTable.findById(accountingTableId);
 
             if (!table) return res.send({
                 message: 'The table does not exist',
                 status: 'error'
             });
 
-            await table.remove();
+            await table.deleteOne();
             res.send({ table, status: 'success' });
         }catch(err){
             res.send({ message: err.message, status: 'error' });

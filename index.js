@@ -1,4 +1,11 @@
 require('./server/api/models/lot');
+require('./server/api/models/accountingTable');
+require('./server/api/models/crop');
+require('./server/api/models/disease');
+require('./server/api/models/expense');
+require('./server/api/models/income');
+require('./server/api/models/lot');
+require('./server/api/models/user');
 
 const express = require("express");
 const path = require("path");
