@@ -1,5 +1,7 @@
 const mongoose = require('mongoose');
 const User = mongoose.model('Users');
+const jwt = require('jsonwebtoken');
+const bcrypt = require('bcryptjs');
 
 const UsersService = {
     async getUsers(req, res) {
@@ -64,6 +66,40 @@ const UsersService = {
         }catch(err){
             res.send({ message: err.message, status: 'error' });
         }
+    },
+    async signUp(req, res) {
+
+        try{
+            const user = new User(req.body);
+    
+            await user.save();
+            const token = jwt.sign({ id: user._id }, 'secret-key', { expiresIn: 86400 });
+            user.password = undefined;
+            res.send({ token: token, user: user, status: 'success' });       
+        }catch(err){
+            res.send({ message: err.message, status: 'error' });
+        }  
+    },
+    async login(req, res) {
+
+        try{
+            const user = await User.findOne({ email: req.body.email });
+            if (!user) 
+                return res.send({ message: 'No user found.', status: 'error' });
+        
+            const passwordIsValid = bcrypt.compareSync(req.body.password, user.password);
+
+            if (!passwordIsValid)
+                return res.send({ token: null, message: 'Wrong email or password.', status: 'error' });
+    
+            const token = jwt.sign({ id: user._id }, 'secret-key', { expiresIn: 86400 });
+    
+            user.password = undefined;
+    
+            res.send({ token: token, user: user, status: 'success' });
+        }catch(err){
+            res.send({ message: err.message, status: 'error' });
+        } 
     }
 }
 
