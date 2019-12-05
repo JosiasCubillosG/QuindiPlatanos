@@ -44,31 +44,20 @@ mongoose.connect(MONGO_URI, {
 });
 
 // static files
-app.use("/static",express.static(path.join(__dirname,"public")));
-
-// view engine setup
-app.set("views",path.join(__dirname,"views"));
-app.set("view engine","pug");
+app.use("/static",express.static(path.join(__dirname,"client/dist")));
 
 // routes
-app.use("/lots", lotsRouter);
 app.use("/api/lots", lotsApiRouter);
-app.use("accountingTables", tablesRouter);
 app.use("/api/accountingTables", tablesApiRouter);
-app.use("crops", cropsRouter);
 app.use("/api/crops", cropsApiRouter);
-app.use("diseases", diseasesRouter);
 app.use("/api/diseases", diseasesApiRouter);
-app.use("users", usersRouter);
 app.use("/api/users", usersApiRouter);
-app.use("incomes", incomesRouter);
 app.use("/api/incomes", incomesApiRouter);
-app.use("expenses", expensesRouter);
 app.use("/api/expenses", expensesApiRouter);
 
 // redirect
-app.use("/", function(req, res){
-    res.redirect('/plants');
+app.use("*", function(req, res){
+    res.sendFile(path.join(__dirname + '/client/dist/index.html'));
 });
 
 // server
