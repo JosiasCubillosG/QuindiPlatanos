@@ -30,6 +30,7 @@ const { MONGO_URI } = require('./server/api/config/constants/database');
 
 // app
 const app = express();
+const root = require('path').join(__dirname, 'client', 'dist')
 
 // middlewares
 app.use(express.json());
@@ -44,7 +45,7 @@ mongoose.connect(MONGO_URI, {
 });
 
 // static files
-app.use("/static",express.static(path.join(__dirname,"client/dist")));
+app.use(express.static(root));
 
 // routes
 app.use("/api/lots", lotsApiRouter);
@@ -57,7 +58,7 @@ app.use("/api/expenses", expensesApiRouter);
 
 // redirect
 app.use("*", function(req, res){
-    res.sendFile(path.join(__dirname + '/client/dist/index.html'));
+    res.sendFile('index.html', {root} );
 });
 
 // server

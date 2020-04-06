@@ -7,7 +7,7 @@ class Menu extends React.Component {
     render() {
         return (
             <div className="menu-container">
-                <Link to="/options" className="menuHome">
+                <Link to="/" className="menuHome">
                     <h2>Inicio</h2>
                 </Link>
                 <Link to="/options/diseases" className="menuDiseases">

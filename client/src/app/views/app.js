@@ -1,6 +1,6 @@
 import React from "react";
 import Layout from "../components/Layout";
-import Login from "../components/login";
+import Login from "./login";
 import Recover from "../components/recoverPass";
 import ModalPassContainer from "./modalPassContainer";
 import ModalPass from "../components/modalPass";
@@ -12,14 +12,14 @@ class App extends React.Component {
     }
 
 
-    recoverPass = (e) => {
+    recoverPass = (e) => {eact.Fragment>
         e.preventDefault();
         this.setState({
             modalPassword: true,
         })
     }
 
-    closeModalPass = (e) => {
+    closeModalPass = (e) => {eact.Fragment>
         e.preventDefault();
         this.setState({
             modalPassword: false,
