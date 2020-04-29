@@ -16,6 +16,21 @@ const LotScheme = new Schema({
 	},
 	cropId: {
 		type: String
+	},
+	tasks: {
+		type: [{
+			name: {
+				required: 'Please add the name.',
+				type: String
+			},
+			days:{
+				required: 'Please add the number days',
+				type: Number
+			},
+			state: {	
+				type: Boolean
+			}
+		}],
 	}
 });
 

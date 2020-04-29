@@ -4,6 +4,7 @@ const Income = mongoose.model('Incomes');
 const IncomeService = {
 
     async getIncomes(req, res) {
+        console.log('Hey!!!')
         const tags = req.query && req.query.tags;
         const query = tags && { tags: { $in: tags } };
 

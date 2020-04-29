@@ -2,6 +2,7 @@ const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCSSExtractPlugin = require('mini-css-extract-plugin');
 const nodeExternals = require('webpack-node-externals');
+const MomentLocalesPlugin = require('moment-locales-webpack-plugin')
 
 module.exports = {
     devServer: {
@@ -65,6 +66,9 @@ module.exports = {
             publicPath: '/',
             filename: "./index.html"
         }),
-        new MiniCSSExtractPlugin()
+        new MiniCSSExtractPlugin(),
+        new MomentLocalesPlugin({
+            localesToKeep: ['es'],
+        }),
     ],
 }

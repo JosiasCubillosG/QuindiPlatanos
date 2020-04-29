@@ -33,14 +33,14 @@ function Routes (){
                                 <Route exact path="/" component={isAuth ? WithAuth(ChooseOption) : Login}/>
                                 <Route exact path="/recover" component={Recover} />
                                 <PrivateRoute exact path="/options/diseases" component={Diseases} />
-                                <PrivateRoute exact path="/options/diseases/detail" component={DetailDisease} />
+                                <PrivateRoute exact path="/options/diseases/:id" component={DetailDisease} />
                                 <PrivateRoute exact path="/options/accounting" component={Accounting} />
                                 <PrivateRoute exact path="/options/accounting/income" component={Income} />
                                 <PrivateRoute exact path="/options/accounting/outlay" component={Outlay} />
                                 <PrivateRoute exact path="/options/accounting/useful" component={Useful} />
                                 <PrivateRoute exact path="/options/crops" component={ListCrops} />
                                 <PrivateRoute exact path="/options/addCrop" component={AddCrop} />
-                                <PrivateRoute exact path="/options/detailCrop" component={DetailCrop} />
+                                <PrivateRoute exact path="/options/detailCrop/:id" component={DetailCrop} />
                                 <PrivateRoute exact path="/menu" component={Menu} />
                                 </Switch>
                             )

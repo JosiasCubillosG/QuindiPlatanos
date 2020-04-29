@@ -2,37 +2,62 @@ import React from 'react';
 import Layout from '../components/Layout';
 import DemoCarousel from '../components/carousel';
 import "./styles/detailDisease.css"
+import Axios from 'axios';
 
 class DetailDisease extends React.Component {
+
+    state = {
+        disease: [],
+        cargando: true,
+        error: false,
+    }
+
+    componentDidMount = () => {
+        Axios(`/api/diseases/${this.props.match.params.id}`,{
+            method: 'GET'
+        })
+        .then(res => {
+            if(res.data.status == 'success'){
+                this.setState({
+                    disease: res.data.disease,
+                    cargando: false
+                })
+                
+            }else{
+                const error = new Error(res.error)
+                throw error
+            }
+        })
+        .catch(err => {
+            console.log(err)
+        })
+    }
+
     render() {
+        const {disease, cargando} = this.state
+        
+        if(cargando){
+            return 'Cargando...'
+        }
+
         return (   
             <div className="detailDisease-container">
                 <div className="nameDisease">
-                    <h2>Nombre de Enfermedad</h2>
+                    <h2>{disease.name}</h2>
                 </div>
                 <div className="carouselDisease">
                     <DemoCarousel />
                 </div>
                 <div className="symptomatology">
                     <h3>Sintomatologia</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-                        Praesent eros orci, lacinia eleifend ipsum condimentum, 
-                        tempor eleifend mauris. In faucibus rutrum pulvinar. 
-                        Sed egestas metus sed mi ultricies vulputate ut at quam.
-                        nt sit amet urna finibus, luctus lorem sed, tempus enim. 
-                        Aenean imperdiet ultrices pulvinar</p>
+                    <p>{disease.symptomatology}</p>
                 </div>
                 <div className="treatment">
                     <h3>Tratamiento</h3>
-                    <p>Morbi sollicitudin neque eu efficitur efficitur. 
-                        Nullam ipsum orci, bibendum quis nulla id, blandit volutpat tellus. 
-                        Nunc maximus massa sit amet porta commodo. Mauris efficitur arcu mauris, 
-                        vitae congue magna pellentesque at. In sagittis urna tellus, 
-                        id tristique ex tempor rhoncus. Suspendisse potenti. 
-                        Sed maximus dui ac ante posuere porttitor</p>
+                    <p>{disease.treatment}</p>
                 </div>
                 <div className="contactSpecialize">
-                    <button className="btnContact">Contactar especialista</button>
+                    <a className="btnContact" href="https://api.whatsapp.com/send?phone=573186337855&text=Hola,%20tengo%20un%20inconveniente." target="_blank">Contactar especialista</a>
                 </div>
             </div>    
         );

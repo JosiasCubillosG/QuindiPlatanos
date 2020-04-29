@@ -6,6 +6,7 @@
 
 .diseases-container a {
     text-decoration: none;
+    color: black;
 }
 
 .diseases-container a:visited {
