@@ -15,6 +15,10 @@ class DetailCrop extends React.Component {
     }
 
     componentDidMount = () => {
+        this.getCrop()
+    }
+
+    getCrop = () => {
         Axios(`/api/lots/${this.props.match.params.id}`,{
             method: 'GET'
         })
@@ -35,6 +39,31 @@ class DetailCrop extends React.Component {
         })
     }
 
+    deleteCrop = () => {
+        Axios(`/api/lots/${this.state.lot._id}`,{
+            method: 'DELETE'
+        })
+        .then(res=>{
+            if(res.data.status == 'success'){
+                alert('Cultivo eliminado')
+                this.props.history.push("/")
+            }else{
+                const error = new Error(res.error)
+                throw error
+            }
+        })
+        .catch(err => {
+            console.log(err)
+        })
+    }
+
+    editCrop = () => {
+        this.props.history.push({
+            pathname: '/options/addCrop',
+            state: {...this.state.lot}
+        })
+    }
+
     render() {
 
         const{lot,cargando,error} = this.state
@@ -50,6 +79,15 @@ class DetailCrop extends React.Component {
                     <p>Numero de plantas: {lot.plants}</p>
                     <p>{moment(lot.createdDate).format('dddd LL h:s a')}</p>
                 </div>
+                <div className="optionsCrop">
+                    <div className="editCrop">
+                        <button onClick={this.editCrop}>EDITAR</button>
+                    </div>
+                    <div className="deleteCrop">
+                        <button onClick={this.deleteCrop}>ELIMINAR</button>
+                    </div>
+                </div>
+
                 <div className="cropTasks">
                     <h3>Tareas:</h3>
                     {

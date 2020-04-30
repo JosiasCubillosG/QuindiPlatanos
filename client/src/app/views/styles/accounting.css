@@ -3,6 +3,12 @@
     grid-template:  3fr/1fr;
     justify-items: center;
     width: 100%;
+    background-image: url('../../../public/images/cultivoPlatano.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-color: rgba(255,255,255,0.2);
+    background-blend-mode: lighten;
 }
 
 .accounting-container a, .accounting-container a:visited {
@@ -20,7 +26,7 @@
     margin-top: 30px;
     margin-bottom: 30px;
     border-radius: 3%;
-    box-shadow: 10px 10px 5px gray;
+    box-shadow: 10px 10px 5px #171515;
 }   
 
 .income{
@@ -36,7 +42,7 @@
     background-image: url("../../../public/images/ingreso.jpg");
     background-size: cover;
     background-position: bottom;
-    background-color: rgba(255,255,255,0.6);
+    background-color: rgba(255,255,255,0.2);
     background-blend-mode: lighten;
 }
 
@@ -44,7 +50,7 @@
     background-image: url("../../../public/images/egreso.jpg");
     background-size: cover;
     background-position: center;
-    background-color: rgba(255,255,255,0.6);
+    background-color: rgba(255,255,255,0.2);
     background-blend-mode: lighten;
 }
 
@@ -52,7 +58,7 @@
     background-image: url("../../../public/images/utilidad.jpg");
     background-size: cover;
     background-position: bottom;
-    background-color: rgba(255,255,255,0.6);
+    background-color: rgba(255,255,255,0.2);
     background-blend-mode: lighten;
 }
 

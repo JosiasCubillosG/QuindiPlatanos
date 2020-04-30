@@ -15,6 +15,10 @@ class ListCrops extends React.Component {
     }
 
     componentDidMount = () => {
+        this.getCrops()
+    }
+
+    getCrops = () => {
         Axios('/api/lots',{
             method: 'GET'
         })
@@ -46,8 +50,8 @@ class ListCrops extends React.Component {
                             <Link to={`/options/detailCrop/${lot._id}`} className="crop1">
                                 <div className="crop1-detail">
                                     <h3>{lot.name}</h3>
-                                    <p>Cantidad de plantas: {lot.plants}</p>
-                                    <p>Fecha: {moment(lot.createdDate).format('LL')}</p>
+                                    <p>{lot.plants} plantas</p>
+                                    <p>{moment(lot.createdDate).format('DD/MM/YYYY')}</p>
                                 </div>
                             </Link>
                         )
