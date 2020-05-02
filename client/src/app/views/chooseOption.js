@@ -2,6 +2,7 @@ import React from 'react'
 import Layout from '../components/Layout'
 import "./styles/chooseOption.css"
 import {Link} from "react-router-dom"
+import Context from '../Context'
 
 class ChooseOption extends React.Component {
     render() {

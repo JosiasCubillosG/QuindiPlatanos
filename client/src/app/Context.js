@@ -4,7 +4,9 @@ import Axios from 'axios'
 
 
 const Provider = ({children}) => {
-    const [isAuth, setIsAuth] = useState(false)
+    const [isAuth, setIsAuth] = useState(()=>{
+        return window.sessionStorage.getItem('token')
+    })
     const [email, setEmail] = useState("")
     const [password, setpassword] = useState("")
 
@@ -20,6 +22,10 @@ const Provider = ({children}) => {
         changePassword: (e) => {
             setpassword(e.target.value)
         },
+        removeAuth: () =>{
+            setIsAuth(!isAuth)
+            window.sessionStorage.removeItem('token')
+        },
         submit: (e) => {
             e.preventDefault()
             Axios('/api/users/login',{
@@ -27,8 +33,10 @@ const Provider = ({children}) => {
                 data: {email, password}
             })
             .then(res => { 
+                console.log(res)
                 if(res.data.status === "success") {
                     setIsAuth(!isAuth)
+                    window.sessionStorage.setItem('token',res.data.token)
                 }else{
                     const error = new Error(res.error)
                     console.error(err)

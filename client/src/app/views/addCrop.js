@@ -31,14 +31,16 @@ class AddCrop extends React.Component {
 
     addCrop = () => {
         if(this.state.id){
+            console.log('Cultivo editado')
             Axios(`/api/lots/${this.state.id}`,{
                 method: 'PUT',
                 data: {...this.state}
             })
             .then(res => {
                 if(res.data.status == 'success'){
+                    console.log('Cultivo editado')
                     alert('Cultivo editado')
-                    this.props.history.push('/')
+                    this.props.history.push('/options/crops')
                 }else{
                     const error = new Error(res.error)
                     throw error
@@ -54,7 +56,7 @@ class AddCrop extends React.Component {
                 data: {...this.state}
             })
             .then(res=>{
-                console.log(res)
+                console.log('Cultivo creado')
                 if(res.data.status === 'success') {
                     alert('Cultivo creado')
                     this.props.history.push('/options/crops')
@@ -77,7 +79,7 @@ class AddCrop extends React.Component {
         return (
             <div className="addCrop-container">
                 <h2 className="addCrop-title">{this.getTitle()}</h2>
-                <form className="addCrop-form">
+                <form className="addCrop-form" onSubmit={this.addCrop}>
                     <div className="group-name">
                         <div className="group-name-icon">
                             <GiFarmer className="addCrop-iconName" />
@@ -101,11 +103,11 @@ class AddCrop extends React.Component {
                         
                     </div>
                                     
-                    <button onClick={this.addCrop} to='/options/crops' className="add-btn">{this.getTitle()}</button>
+                    <button type="submit" value="Submit" className="add-btn">{this.getTitle()}</button>
                 </form>
             </div>
         );
     }
 }
 
-export default withRouter(AddCrop);
+export default AddCrop;

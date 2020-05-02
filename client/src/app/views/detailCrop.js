@@ -46,7 +46,7 @@ class DetailCrop extends React.Component {
         .then(res=>{
             if(res.data.status == 'success'){
                 alert('Cultivo eliminado')
-                this.props.history.push("/")
+                this.props.history.push("/options/crops")
             }else{
                 const error = new Error(res.error)
                 throw error

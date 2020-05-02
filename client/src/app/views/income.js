@@ -15,6 +15,8 @@ class Income extends React.Component {
     }
 
     componentDidMount = () => {
+        console.log(this.state)
+        console.log('Didmount')
         this.addIncomes()
     }
 
@@ -46,6 +48,8 @@ class Income extends React.Component {
     }
 
     addIncome = (e) => {
+        console.log('Agregar')
+        console.log(this.state.id)
         if(this.state.id){
             Axios(`/api/incomes/${this.state.id}`,{
                 method: 'PUT',
@@ -60,6 +64,7 @@ class Income extends React.Component {
                         id: ''
                     })
                     this.addIncomes()
+                    
                 }else{
                     const error = new Error(res.error)
                     throw error

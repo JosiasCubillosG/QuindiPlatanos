@@ -17,6 +17,8 @@ class Outlay extends React.Component {
     }
 
     componentDidMount = () => {
+        console.log(this.state)
+        console.log('Didmount')
         this.addOutlays()
     }
 
@@ -29,6 +31,7 @@ class Outlay extends React.Component {
                 this.setState({
                     outlays: res.data.expense
                 })
+                console.log(this.state)
             }else{
                 const error = new Error(res.error)
                 throw error
@@ -48,6 +51,8 @@ class Outlay extends React.Component {
     }
 
     addOutlay = (e) => {
+        console.log('Agregar')
+        console.log(this.state.id)
         if(this.state.id){
             Axios(`/api/expenses/${this.state.id}`,{
                 method: 'PUT',
@@ -148,10 +153,10 @@ class Outlay extends React.Component {
 
                     <div className='IncomeGroup'>
                         <label className="addIncome-value">Valor</label>
-                        <input className="valueIncome" onChange={this.addValues} type="number" name="value" required></input>
+                        <input className="valueIncome" onChange={this.addValues} value={this.state.value} type="number" name="value" required></input>
                     </div>   
 
-                    <textarea className="descriptionIncome" onChange={this.addValues} rows="5" cols="26" name="description" placeholder="Descripción del gasto" required ></textarea>
+                    <textarea className="descriptionIncome" onChange={this.addValues} value={this.state.description} rows="5" cols="26" name="description" placeholder="Descripción del gasto" required ></textarea>
 
                     <div className="incomeBtn">
                         <button onClick={this.addOutlay}>Agregar</button>
@@ -175,7 +180,7 @@ class Outlay extends React.Component {
                                         <td className="th-name">{outlay.description}</td>
                                         <td className="th-valor">{outlay.value}</td>
                                         <td className="th-valor">
-                                            <FiEdit onClick={()=>this.editOutlay(income._id)} className="editIncome" />
+                                            <FiEdit onClick={()=>this.editOutlay(outlay._id)} className="editIncome" />
                                             <MdDeleteForever onClick={()=>this.deleteOutlay(outlay._id)} className="deleteIncome" />
                                         </td>
                                     </tr>
