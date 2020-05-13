@@ -4,6 +4,8 @@ import "./styles/income.css"
 import Axios from 'axios';
 import {FiEdit} from 'react-icons/fi'
 import {MdDeleteForever} from 'react-icons/md'
+import {NotificationContainer, NotificationManager} from 'react-notifications'
+import '../../../../node_modules/react-notifications/lib/notifications.css'
 
 
 
@@ -51,48 +53,52 @@ class Outlay extends React.Component {
     }
 
     addOutlay = (e) => {
-        console.log('Agregar')
-        console.log(this.state.id)
-        if(this.state.id){
-            Axios(`/api/expenses/${this.state.id}`,{
-                method: 'PUT',
-                data: {...this.state}
-            })
-            .then(res=>{
-                if(res.data.status === 'success') {
-                    alert('Gasto editado')
-                    this.setState({
-                        value: '',
-                        description: '',
-                        id: ''
-                    })
-                    this.addOutlays()
-                }else{
-                    const error = new Error(res.error)
-                    throw error
-                }
-            })
-            .catch(err =>{
-                console.log(err)
-            })
+        e.preventDefault()
+        if(this.state.value == 0 || this.state.description.trim() == '' || Math.sign(this.state.value) == -1){
+            NotificationManager.warning('Digite algún dato','Datos vacios')
 
         }else{
-            Axios('/api/expenses',{
-                method: 'POST',
-                data: {...this.state}
-            })
-            .then(res=>{
-                if(res.data.status === 'success') {
-                    alert('Gasto agregado')
-                    this.addOutlays()
-                }else{
-                    const error = new Error(res.error)
-                    throw error
-                }
-            })
-            .catch(err =>{
-                console.log(err)
-            })
+            if(this.state.id){
+                Axios(`/api/expenses/${this.state.id}`,{
+                    method: 'PUT',
+                    data: {...this.state}
+                })
+                .then(res=>{
+                    if(res.data.status === 'success') {
+                        NotificationManager.info('El gasto se ha editado con exito', 'Gasto editado')
+                        this.setState({
+                            value: '',
+                            description: '',
+                            id: ''
+                        })
+                        this.addOutlays()
+                    }else{
+                        const error = new Error(res.error)
+                        throw error
+                    }
+                })
+                .catch(err =>{
+                    console.log(err)
+                })
+    
+            }else{
+                Axios('/api/expenses',{
+                    method: 'POST',
+                    data: {...this.state}
+                })
+                .then(res=>{
+                    if(res.data.status === 'success') {
+                        NotificationManager.info('El gasto se ha creado con exito', 'Gasto creado')
+                        this.addOutlays()
+                    }else{
+                        const error = new Error(res.error)
+                        throw error
+                    }
+                })
+                .catch(err =>{
+                    console.log(err)
+                })
+            }
         }
     }
 
@@ -102,7 +108,7 @@ class Outlay extends React.Component {
         })
         .then(res =>{
             if(res.data.status == 'success'){
-                alert('Tarea borrada')
+                NotificationManager.error('El gasto se ha eliminado', 'Gasto eliminado')
                 this.addOutlays()
             }else{
                 const error = new Error(res.error)
@@ -189,6 +195,7 @@ class Outlay extends React.Component {
                         }
                     </table>
                 </div>
+                <NotificationContainer />
             </div>
         );
     }

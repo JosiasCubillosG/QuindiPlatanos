@@ -1,11 +1,11 @@
 {
-    "short_name":"Quindiplatanos",
     "name": "Quindiplatanos",
+    "short_name":"Quindiplatanos",
     "icons": [
         {
-            "src":"/images/cultivoPlatano.jpg",
+            "src":"./images/cerrarSesion.png",
             "sizes": "512x512",
-            "type": "image/jpg"
+            "type": "image/png"
         }
     ],
     "start_url": "/",
@@ -16,3 +16,4 @@
     "related_applications": [],
     "prefer_related_applications": false
 }
+

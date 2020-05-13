@@ -1,5 +1,7 @@
 const mongoose = require('mongoose');
 const Disease = mongoose.model('Diseases');
+const S3Service = require('./s3Service')
+const s3Service = new S3Service()
 
 const DiseasesService = {
     async getDiseases(req, res) {
@@ -27,6 +29,10 @@ const DiseasesService = {
         const { body: diseaseData } = req;
         try{
             const disease = new Disease(diseaseData);
+            if(req.file){
+                const amazonResponse = await s3Service.uploadImage(req.file, disease._id);
+                disease.imageURL = amazonResponse.imageURL 
+            }
             await disease.save();
             res.send({ disease, status: 'success' });
         }catch(err){
@@ -59,6 +65,7 @@ const DiseasesService = {
                 status: 'error'
             });
 
+            await s3Service.deleteImage(disease.imageURL)
             await disease.remove();
             res.send({ disease, status: 'success' });
         }catch(err){

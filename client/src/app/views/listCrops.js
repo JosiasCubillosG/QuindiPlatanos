@@ -6,15 +6,33 @@ import Axios from 'axios';
 import moment from 'moment'
 import 'moment/locale/es'
 moment.locale('es')
+import {NotificationContainer, NotificationManager} from 'react-notifications'
+import '../../../../node_modules/react-notifications/lib/notifications.css'
 
 
 class ListCrops extends React.Component {
 
     state = {
         lots: [],
+        deleted: false,
+        created: false
     }
 
     componentDidMount = () => {
+        if(this.props.location.state){
+            if(this.props.location.state.edited){
+                this.setState({
+                    deleted: !this.state.deleted
+                })
+            }
+    
+            if(this.props.location.state.plants){
+                this.setState({
+                    created: true
+                })
+            }
+        }
+        
         this.getCrops()
     }
 
@@ -25,7 +43,7 @@ class ListCrops extends React.Component {
         .then(res=>{
             if(res.data.status === 'success') {
                 this.setState({
-                    lots: res.data.lots
+                    lots: res.data.lots,
                 })
             }else{
                 const error = new Error(res.error)
@@ -40,7 +58,19 @@ class ListCrops extends React.Component {
     render() {
 
         const {lots} = this.state
+        if(this.state.deleted){
+            this.setState({
+                deleted: !this.state.deleted
+            })
+            NotificationManager.error('Cultivo eliminado con exito','Cultivo eliminado')
+        }
 
+        if(this.state.created){
+            this.setState({
+                created: !this.state.created
+            })
+            NotificationManager.info('Cultivo agregado con exito','Cultivo agregado')
+        }
 
         return (
             <div className="listCrops-container">
@@ -62,6 +92,7 @@ class ListCrops extends React.Component {
                 <Link to="/options/addCrop" className="addCrop">
                     <button className="btnAddCrop">Añadir cultivo</button>
                 </Link>
+                <NotificationContainer />
             </div>
         );
     }

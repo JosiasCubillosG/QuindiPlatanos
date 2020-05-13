@@ -28,7 +28,11 @@ module.exports = {
                 }
             },
             {
-                test: /\.(jpg|png|gif|svg|jpeg)$/,
+                test: /\.json$/,
+                loader: 'json-loader'
+            },
+            {
+                test: /\.(jpg|png|gif|svg|jpeg|woff|eot|ttf)$/,
                 use: [
                     {
                         loader:"url-loader",

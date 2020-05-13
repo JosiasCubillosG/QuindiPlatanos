@@ -1,3 +1,4 @@
+require('dotenv').config();
 require('./server/api/models/lot');
 require('./server/api/models/accountingTable');
 require('./server/api/models/crop');
@@ -9,6 +10,7 @@ require('./server/api/models/user');
 
 const express = require("express");
 const path = require("path");
+const multer = require('multer')
 const mongoose = require('mongoose');
 const lotsRouter = require('./server/api/routes/views/lots');
 const lotsApiRouter = require('./server/api/routes/api/lots');
@@ -30,11 +32,24 @@ const { MONGO_URI } = require('./server/api/config/constants/database');
 
 // app
 const app = express();
-const root = require('path').join(__dirname, 'client', 'dist')
+const root = require('path').join(__dirname, 'client/dist')
+
+const storage = multer.diskStorage({
+	destination: path.join(__dirname,'./server/api/images'),
+	filename: (req, file, cb) => {
+		cb(null, file.originalname)
+	}
+})
+
 
 // middlewares
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(multer({
+	storage,
+	dest: path.join(__dirname,'./server/api/images'),
+	// limits: {fileSize: 1000000}
+}).single('imageURL'))
 
 // database setting
 mongoose.Promise = global.Promise;
@@ -46,6 +61,7 @@ mongoose.connect(MONGO_URI, {
 
 // static files
 app.use(express.static(root));
+// app.use('/app',express.static('client/src/public'));
 
 // routes
 app.use("/api/lots", lotsApiRouter);

@@ -4,6 +4,8 @@ import "./styles/income.css"
 import Axios from 'axios';
 import {FiEdit} from 'react-icons/fi'
 import {MdDeleteForever} from 'react-icons/md'
+import {NotificationContainer, NotificationManager} from 'react-notifications'
+import '../../../../node_modules/react-notifications/lib/notifications.css'
 
 class Income extends React.Component {
 
@@ -15,8 +17,6 @@ class Income extends React.Component {
     }
 
     componentDidMount = () => {
-        console.log(this.state)
-        console.log('Didmount')
         this.addIncomes()
     }
 
@@ -48,49 +48,58 @@ class Income extends React.Component {
     }
 
     addIncome = (e) => {
-        console.log('Agregar')
-        console.log(this.state.id)
-        if(this.state.id){
-            Axios(`/api/incomes/${this.state.id}`,{
-                method: 'PUT',
-                data: {...this.state}
-            })
-            .then(res=>{
-                if(res.data.status === 'success') {
-                    alert('Gasto editado')
-                    this.setState({
-                        value: '',
-                        description: '',
-                        id: ''
-                    })
-                    this.addIncomes()
-                    
-                }else{
-                    const error = new Error(res.error)
-                    throw error
-                }
-            })
-            .catch(err =>{
-                console.log(err)
-            })
+        e.preventDefault()
+        if(this.state.value == 0 || this.state.description.trim() == '' || Math.sign(this.state.value) == -1){
+            NotificationManager.warning('Digite algún dato','Datos vacios')
 
         }else{
-            Axios('/api/incomes',{
-                method: 'POST',
-                data: {...this.state}
-            })
-            .then(res=>{
-                if(res.data.status === 'success') {
-                    alert('Gasto agregado')
-                    this.addIncomes()
-                }else{
-                    const error = new Error(res.error)
-                    throw error
-                }
-            })
-            .catch(err =>{
-                console.log(err)
-            })
+            if(this.state.id){
+                Axios(`/api/incomes/${this.state.id}`,{
+                    method: 'PUT',
+                    data: {...this.state}
+                })
+                .then(res=>{
+                    if(res.data.status === 'success') {
+                        NotificationManager.info('El ingreso se ha editado con exito', 'ingreso editado')
+                        this.setState({
+                            value: '',
+                            description: '',
+                            id: ''
+                        })
+                        this.addIncomes()
+                        
+                    }else{
+                        const error = new Error(res.error)
+                        throw error
+                    }
+                })
+                .catch(err =>{
+                    console.log(err)
+                })
+
+            }else{
+                Axios('/api/incomes',{
+                    method: 'POST',
+                    data: {...this.state}
+                })
+                .then(res=>{
+                    if(res.data.status === 'success') {
+                        this.setState({
+                            value: '',
+                            description: '',
+                            id: ''
+                        })
+                        NotificationManager.info('El ingreso se ha creado con exito', 'Ingreso creado')
+                        this.addIncomes()
+                    }else{
+                        const error = new Error(res.error)
+                        throw error
+                    }
+                })
+                .catch(err =>{
+                    console.log(err)
+                })
+            }
         }
     }
 
@@ -100,7 +109,7 @@ class Income extends React.Component {
         })
         .then(res =>{
             if(res.data.status == 'success'){
-                alert('Tarea borrada')
+                NotificationManager.error('El ingreso se ha eliminado', 'Ingreso eliminado')
                 this.addIncomes()
             }else{
                 const error = new Error(res.error)
@@ -154,7 +163,7 @@ class Income extends React.Component {
                         <input className="valueIncome" onChange={this.addValues} value={this.state.value} type="number" name="value" required></input>
                     </div>   
     
-                    <textarea className="descriptionIncome" onChange={this.addValues} value={this.state.description} rows="5" cols="26" name="description" placeholder="Descripción del gasto" required ></textarea>
+                    <textarea className="descriptionIncome" onChange={this.addValues} value={this.state.description} rows="5" cols="26" name="description" placeholder="Descripción del ingreso" required ></textarea>
 
                     <div className="incomeBtn">
                         <button type="submit">Agregar</button>
@@ -185,6 +194,7 @@ class Income extends React.Component {
                         }
                     </table>
                 </div>
+                <NotificationContainer />
             </div>
         );
     }

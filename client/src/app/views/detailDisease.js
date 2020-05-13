@@ -35,7 +35,7 @@ class DetailDisease extends React.Component {
 
     render() {
         const {disease, cargando} = this.state
-        
+        console.log(disease)
         if(cargando){
             return 'Cargando...'
         }
@@ -48,6 +48,7 @@ class DetailDisease extends React.Component {
                 <div className="carouselDisease">
                     <DemoCarousel />
                 </div>
+                <img src={disease.imageURL} />
                 <div className="symptomatology">
                     <h3>Sintomatologia</h3>
                     <p>{disease.symptomatology}</p>

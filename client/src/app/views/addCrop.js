@@ -4,11 +4,17 @@ import {Link, withRouter} from 'react-router-dom'
 import "./styles/addCrop.css"
 import Axios from 'axios';
 import {GiFarmer,GiFarmTractor} from 'react-icons/gi'
+import {NotificationContainer, NotificationManager} from 'react-notifications'
+import '../../../../node_modules/react-notifications/lib/notifications.css'
+
+
+
+
 class AddCrop extends React.Component {
 
     state = {
         name: '',
-        plants: '',
+        plants: 0,
         id: '',
     }
 
@@ -29,45 +35,53 @@ class AddCrop extends React.Component {
         })
     }
 
-    addCrop = () => {
-        if(this.state.id){
-            console.log('Cultivo editado')
-            Axios(`/api/lots/${this.state.id}`,{
-                method: 'PUT',
-                data: {...this.state}
-            })
-            .then(res => {
-                if(res.data.status == 'success'){
-                    console.log('Cultivo editado')
-                    alert('Cultivo editado')
-                    this.props.history.push('/options/crops')
-                }else{
-                    const error = new Error(res.error)
-                    throw error
-                }
-            })
-            .catch(err =>{
-                console.log(err)
-            })
-
+    addCrop = (e) => {
+        e.preventDefault()
+        if(this.state.plants == 0 || this.state.name.trim() == '' || Math.sign(this.state.plants) == -1){
+            NotificationManager.warning('Digite algún dato','Datos vacios')
         }else{
-            Axios('/api/lots',{
-                method: 'POST',
-                data: {...this.state}
-            })
-            .then(res=>{
-                console.log('Cultivo creado')
-                if(res.data.status === 'success') {
-                    alert('Cultivo creado')
-                    this.props.history.push('/options/crops')
-                }else{
-                    const error = new Error(res.error)
-                    throw error
-                }
-            })
-            .catch(err =>{
-                console.log(err)
-            })
+            if(this.state.id){
+                Axios(`/api/lots/${this.state.id}`,{
+                    method: 'PUT',
+                    data: {...this.state}
+                })
+                .then(res => {
+                    if(res.data.status == 'success'){  
+                        this.props.history.push({
+                            pathname: `/options/detailCrop/${this.state.id}`,
+                            state: {...this.state}
+                        })
+                    }else{
+                        const error = new Error(res.error)
+                        throw error
+                    }
+                })
+                .catch(err =>{
+                    console.log(err)
+                })
+    
+            }else{
+                Axios('/api/lots',{
+                    method: 'POST',
+                    data: {...this.state}
+                })
+                .then(res=>{
+                    console.log('Cultivo creado')
+                    if(res.data.status === 'success') {
+                        alert('Cultivo creado')
+                        this.props.history.push({
+                            pathname: '/options/crops',
+                            state: {...this.state}
+                        })
+                    }else{
+                        const error = new Error(res.error)
+                        throw error
+                    }
+                })
+                .catch(err =>{
+                    console.log(err)
+                })
+            }
         }
     }
 
@@ -98,13 +112,14 @@ class AddCrop extends React.Component {
                         
                         <div className="group-numberPlants-input">
                             <label className="addCrop-numberPlants">Numero de plantas</label>    
-                            <input className="numberPlants" placeholder="Digite el número de plantas" type="text" onChange={this.handleInputChange} value={this.state.plants}  name="plants" required></input>
+                            <input className="numberPlants" placeholder="Digite el número de plantas" type="number" onChange={this.handleInputChange} value={this.state.plants}  name="plants" required></input>
                         </div>
                         
                     </div>
                                     
                     <button type="submit" value="Submit" className="add-btn">{this.getTitle()}</button>
                 </form>
+                <NotificationContainer />
             </div>
         );
     }
