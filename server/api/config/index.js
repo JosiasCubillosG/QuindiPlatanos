@@ -9,6 +9,8 @@ const config={
     AMAZON_SECRET_KEY: process.env.AMAZON_SECRET_KEY,
     AMAZON_PUBLIC_KEY: process.env.AMAZON_PUBLIC_KEY,
     BUCKET_NAME: process.env.BUCKET_NAME,
+    PUBLIC_VAPID_KEY: process.env.PUBLIC_VAPID_KEY,
+    PRIVATE_VAPID_KEY: process.env.PRIVATE_VAPID_KEY,
 };
 
 module.exports = { config };

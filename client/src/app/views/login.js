@@ -14,40 +14,6 @@ class Login extends React.Component {
         modalPassword: false,
     }
 
-
-    // handleInputChange = (e) => {
-    //     const {name, value} = e.target;
-    //     const a = e.target.name;
-    //     this.setState({
-    //         [name]: value,
-    //     })
-    // }
-
-    // onSubmit = (e) => {
-        // e.preventDefault();
-        // Axios('/api/users/login',{
-        //     method: 'POST',
-        //     data: {...this.state}
-        // })
-        // .then(res => { 
-        //     if(res.data.status === "success") {
-        //         this.setState({
-        //             isAuthenticated: true
-        //         })
-        //         console.log(this.state.isAuthenticated)
-        //         this.props.history.push('/options')
-        //     }else{
-        //         const error = new Error(res.error)
-        //         throw error
-        //     }
-        // })
-        // .catch(err => {
-        //     console.error(err)
-        //     alert('Error iniciando sesión')
-        // });
-    // }
-
-
     recoverPass = (e) => {eact.Fragment>
         e.preventDefault();
         this.setState({

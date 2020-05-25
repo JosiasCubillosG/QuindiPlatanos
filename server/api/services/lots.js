@@ -35,10 +35,10 @@ const LotsService = {
         }
     },
     async updateLot(req, res) {
-        const { body: lotData } = req;
+        const lotData = req.body.lotData;
         try{
             const lot = await Lot.findById(req.params.lotId);
-
+            console.log(lotData.tasks)
             if (!lot) return res.send({
                 message: 'The lot does not exist',
                 status: 'error'

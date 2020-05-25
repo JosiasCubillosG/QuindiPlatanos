@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const moment = require('moment')
 const Schema = mongoose.Schema;
 
 const LotScheme = new Schema({
@@ -17,20 +18,26 @@ const LotScheme = new Schema({
 	cropId: {
 		type: String
 	},
-	tasks: {
-		type: [{
-			name: {
-				required: 'Please add the name.',
-				type: String
-			},
-			days:{
-				required: 'Please add the number days',
-				type: Number
-			},
-			state: {	
-				type: Boolean
+	tasks:{
+		type:[
+			{
+				name: String,
+				state: Boolean,
+				days: Number
 			}
-		}],
+		],
+		default: [
+			{
+				name: 'Abonar',
+				state: false,
+				days: 1,
+			},
+			{
+				name: 'Fumigar',
+				state: false,
+				days: 2,
+			}
+		]
 	}
 });
 

@@ -20,7 +20,7 @@ import PrivateRoute from "./privateRoute";
 import Context from '../Context'
 
 function Routes (){
-
+    console.log('holaaa')
     return(
         <BrowserRouter>
             <Layout>

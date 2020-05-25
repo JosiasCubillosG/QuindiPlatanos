@@ -18,12 +18,6 @@ class DetailCrop extends React.Component {
     }
 
     componentDidMount = () => {
-            // if(this.props.location.state){
-            //     this.setState({
-            //         edited: !this.state.edited
-            //     })
-            //     console.log(this.state)
-            // }
             this.getCrop()
 
     }
@@ -126,30 +120,7 @@ class DetailCrop extends React.Component {
                 <div className="cropTasks">
                     <h3>Tareas:</h3>
                     {
-                        lot.tasks.map(task => {
-                            if(task.state){
-                                return(
-                                    <div className="cropTaskDetail1">
-                                        <h4>{task.name}</h4>
-                                        <div className="check">
-                                            <h6>Dentro de: {task.days}</h6>
-                                            <div className="checkTaskTrue"></div>
-                                        </div>
-                                    </div>
-                                )
-                            }else{
-                                return(
-                                    <div className="cropTaskDetail1">
-                                        <h4>{task.name}</h4>
-                                        <div className="check">
-                                            <h6>Dentro de: {task.days}</h6>
-                                            <div className="checkTaskFalse"></div>
-                                        </div>
-                                    </div>
-                                )
-                            }
-                            
-                        })
+                        console.log(lot)
                     }
                 </div>
                 <NotificationContainer />

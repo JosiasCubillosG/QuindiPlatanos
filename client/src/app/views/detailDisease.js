@@ -48,7 +48,6 @@ class DetailDisease extends React.Component {
                 <div className="carouselDisease">
                     <DemoCarousel />
                 </div>
-                <img src={disease.imageURL} />
                 <div className="symptomatology">
                     <h3>Sintomatologia</h3>
                     <p>{disease.symptomatology}</p>
